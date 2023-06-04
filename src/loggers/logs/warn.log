@@ -1,0 +1,11 @@
+{"level":"warn","message":"No hay productos cargados en la base de datos"}
+{"level":"warn","message":"No se completo toda la informacion del producto para poder cargarlo"}
+{"level":"warn","message":"No hay productos cargados en la base de datos"}
+{"level":"warn","message":"No se encontro un item que haga match con el id solicitado"}
+{"level":"warn","message":"No existe producto con tal id en la base de datos"}
+{"level":"warn","message":"No hay producto con dicho id en la base de datos"}
+{"level":"warn","message":"No se creo un carrito para la session, por lo tanto no se pudo agregar un producto cuando se solicito"}
+{"level":"warn","message":"No se encontro un item que haga match con el id solicitado"}
+{"level":"warn","message":"No se encontro producto con id: 2 en la base de datos"}
+{"level":"warn","message":"Ruta GET /api/product no implementada"}
+{"level":"warn","message":"Ruta GET /api/products no implementada"}

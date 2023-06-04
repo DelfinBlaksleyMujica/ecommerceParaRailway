@@ -1,0 +1,3 @@
+Se puede ver que los resultados en modo cluster son mejores, si bien la diferencia es minima ya que
+la comparación entre ambos modos, "FORK" y "CLUSTER", se hizo nada más que con 2000 soliciutdes. A medida
+que las solicitudes aumenten esta diferencia se hara mucho más evidente.

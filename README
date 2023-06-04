@@ -1,0 +1,64 @@
+# Proyecto Final-E COMMERCE BACKEND / DelfinBlakleyMujica / CoderHouse
+
+### Intrducción && Desarollo
+
+El proyecto esta basado en la creación de un E-Commerce para la marca de ropa Activá Studio. Dicho E-commerce esta desarrollado puramente en Backend, es decir, en modo API RESTful. Las funcionalidades que se encuentran en esta API se basan en el manejo de productos( GET , POST , UPDATE , DELETE ), para poder agregar, actualizar, listar todos , listar por id  y  eliminar productos. Por otro lado tambien cuenta con metodos de autorizacion y autenticacion de usuarios, permitiendo registrar usuarios guardandolos en una base de datos, con sus respectivas contraseñas hasheadas y sus otros datos para posterior chequeo a la hora de querer entrar a la aplicacion ecommerce. Ademas la aplicación permite realizar compras y manejar los carritos agregando carritos y productos, eliminado productos y carritos , listando los productos de los carritos y listando los carritos de la base de datos. Todas las funcionalidades estan hechas principalmente para manejarse con MongoDB pero al contar con una arquitectura de capas donde se tiene capa de servicios, controladores , capa de persistencia y capa de presentacion dicha aplicacion puede utilizarse con cualquier base de datos, solo basta con agregar el el manager y el modelo y unirlos en el factory gracias al DAOs. Además cuenta con funcionalidades simples( GET , POST ) para manejar mensajes desde una capa de repositorios. La API ademas cuenta con test para la capa de servicios de productos donde se puede comprobar que los endpoints esten funcionando correctamente. Por otro lado, la mensajeria de la aplicación a la hora de manejar los mensajes, mails y whatsapps, lo trabaje a traves de nodemailer y twilio. Dichos mensajes solamente funcionan para Argentina contando con el prefijo +549 para llamados del país. El ecommerce esta configurado para trabajarse en servidores en modo FORK como tambien en modo CLUSTER, permitiendo en el segundo caso siempre tener un proceso activo para tener el servidor activo. En cuanto a los middlewares locales, se cuenta con bloqueos a las rutas de productos y carritos para los usuarios  que no esten logueados, de modo que la unica manera de poder navergar libremente por el sitio realizando peticiones es si el usuario se encuentra logueado. Además los unicos que van a poder agregar, editar y borrar productos de la base de datos seran los administradores.
+
+## ENDPOINTS
+
+Todas las rutas cuentas con sus respectivas respuestas para guiar al usuario y desarrollador en caso de esta utilizando mal las funcionalidades o estar cargando mal la información.
+
+# /api/productos
+
+- GET "/" : esta ruta trae todos los productos cargados en la base de datos.
+
+- POST "/": pasando los parametros adecuados se pueden cargar productos en la base de datos.
+
+- GET "/:id": esta ruta permite traer productos individuales a partir de su numero de id.
+
+- DELETE "/:id": esta ruta permite eliminar productos de la base de datos.
+
+# /api/carritos
+
+- GET "/" : esta ruta permite traerse todos los carritos cargados en la base de datos.
+
+- POST "/" : esta ruta crea un carrito, en el caso de estar trabajando con Mongo DB dicho carrito se creara tambien en la session del usuario que entro en la aplicacion a traves de sus credenciales.
+
+- DELETE "/:id": esta ruta permite borrar un carrito de la base de datos a traves de su id.
+
+- GET "/:id/productos": esta ruta a traves del id de un carrito te permite ver los productos que hay en dicho carrito.
+
+- POST "/:id/productos": esta ruta permite agregar un producto al ultimo carrito agregado a la base de datos a traves del id del producto que querramos agregar.
+
+- POST "/checkout": esta ruta es la que permite finalizar con la compra. Una vez que se ejectue se enviara una mail y un mensaje al administrador de la aplicacion avisandole que se realizo una nueva compra y al mismo tiempo el comprador recibira un mensaje de texto que confirma su compra.
+
+- DELETE "/:id/productos/:idProd": esta ruta permite borrar un producto de un carrito determinado a traves del id del carrito y del id del producto.
+
+
+# /api/auth
+
+- GET "/registro": esta pensada para traer a vista un formulario de registro.
+
+- GET "/inicio-de-sesion": esta ruta esta pensada para traer a vista un formulario de login.
+
+- GET "/logout": esta ruta es a la que se debe acudir para cerrar una sesion.
+
+- POST "/signup": esta ruta es la que funciona para el registro de usuarios.
+
+- POST "/login": a traves de esta ruta se puede acceder a la aplicacion.
+
+# /api/mensajes
+
+- GET "/": ver todos los mensajes que hay en la base de datos guardados.
+
+- POST "/": agregar un mensaje nuevo a la base de datos.
+
+
+## Camino feliz de la aplicacion para usuario que quiere comprar productos
+
+1) POST - "/api/auth/signup": para registrarse.
+2) POST - "/api/auth/login": para loguearse.
+3) POST - "/api/carritos": para crear un carrito.
+4) POST - "/api/carritos/IdDeProducto/productos": para añadir un producto al carrito.
+5) POST - "/api/carritos/checkout": para finalizar la compra.
+6) GET - "api/auth/logout": para cerrar sesion.
